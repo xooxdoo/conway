@@ -151,7 +151,9 @@ class Renderer {
   }
   
   renderCursor(ctx) {
-    
+    ctx.strokeStyle = "dodgerblue";
+    let unit = this.unit;
+    ctx.strokeRect(this.cursor.x * unit, this.cursor.y * unit, unit, unit);
   }
   
   renderCell(grid, ctx, x, y) {
