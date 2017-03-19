@@ -221,7 +221,7 @@ class Renderer {
   }
   
   get canvas() { return this.ctx.canvas; }
-  get unit() { return this.grid.size / this.size; }
+  get unit() { return this.size / this.grid.size; }
   
   render() {
     // console.log("Rendering");
