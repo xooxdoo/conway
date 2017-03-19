@@ -85,49 +85,114 @@ class Grid {
   }
   
   calculateScore(x, y) {
-    /*/
     let last = this.size - 1;
     let score = 0;
-
-    if (x === 0)    score += this.cells[y][last];
-    else            score += this.cells[y][x - 1];
-    if (x === last) score += this.cells[y][0];
-    else            score += this.cells[y][x + 1];
-
-    if (y === 0)    score += this.cells[last][x];
-    else            score += this.cells[y - 1][x];
-    if (y === last) score += this.cells[0][x];
-    else            score += this.cells[y + 1][x];
-
-    score += y === 0 && x === 0 ? this.cells[last][last] : this.cells[y - 1][x - 1];
-    score += y === last && x === last ? this.cells[0][0] : this.cells[y + 1][x + 1];
-    score += y === 0 && x === last ? this.cells[last][0] : this.cells[y - 1][x - 1];
-    score += y === last && x === 0 ? this.cells[0][last] : this.cells[y + 1][x + 1];
+    
+    if (x !== 0) {
+      if (y !== 0) {
+        score += this.cells[y - 1][x - 1];
+      } else {
+        score += this.cells[last][x - 1];
+      }
+      score += this.cells[y][x - 1];
+      if (y !== last) {
+        score += this.cells[y + 1][x - 1];
+      } else {
+        score += this.cells[0][x - 1];
+      }
+    } else {
+      if (y !== 0) {
+        score += this.cells[y - 1][last];
+      } else {
+        score += this.cells[last][last];
+      }
+      score += this.cells[y][last];
+      if (y !== last) {
+        score += this.cells[y + 1][last];
+      } else {
+        score += this.cells[0][last];
+      }
+    }
+    
+    if (x !== last) {
+      if (y !== 0) {
+        score += this.cells[y - 1][x + 1];
+      } else {
+        score += this.cells[last][x + 1];
+      }
+      score += this.cells[y][x + 1];
+      if (y !== last) {
+        score += this.cells[y + 1][x + 1];
+      } else {
+        score += this.cells[0][x + 1];
+      }
+    } else {
+      if (y !== 0) {
+        score += this.cells[y - 1][0];
+      } else {
+        score += this.cells[last][0];
+      }
+      score += this.cells[y][last];
+      if (y !== last) {
+        score += this.cells[y + 1][0];
+      } else {
+        score += this.cells[0][0];
+      }
+    }
+    
+    if (y !== 0) {
+      if (x !== 0) {
+        score += this.cells[y - 1][x - 1];
+      } else {
+        score += this.cells[y - 1][last];
+      }
+      score += this.cells[y - 1][x];
+      if (x !== last) {
+        score += this.cells[y + 1][x + 1];
+      } else {
+        score += this.cells[y + 1][0];
+      }
+    } else {
+      if (x !== 0) {
+        score += this.cells[last][x - 1];
+      } else {
+        score += this.cells[last][last];
+      }
+      score += this.cells[last][x];
+      if (x !== last) {
+        score += this.cells[last][x + 1];
+      } else {
+        score += this.cells[last][0];
+      }
+    }
+    
+    if (y !== last) {
+      if (x !== 0) {
+        score += this.cells[y + 1][x - 1];
+      } else {
+        score += this.cells[y + 1][last];
+      }
+      score += this.cells[y + 1][x];
+      if (x !== last) {
+        score += this.cells[y + 1][x + 1];
+      } else {
+        score += this.cells[y + 1][0];
+      }
+    } else {
+      if (x !== 0) {
+        score += this.cells[0][x - 1];
+      } else {
+        score += this.cells[0][last];
+      }
+      score += this.cells[0][x];
+      if (x !== last) {
+        score += this.cells[0][x + 1];
+      } else {
+        score += this.cells[0][0];
+      }
+    }
     
     return score;
-    /*/
-    let last = this.size - 1;
-    return (
-      (x === 0 ? this.cells[y][last] : this.cells[y][x - 1]) +
-      (y === 0 ? this.cells[last][x] : this.cells[y - 1][x]) +
-      (y === 0 && x === 0 ?
-         this.cells[last][last] :
-         this.cells[y - 1][x - 1]) +
-      
-      (x === last ? this.cells[y][0] : this.cells[y][x + 1]) +
-      (y === last ? this.cells[0][x] : this.cells[y + 1][x]) +
-      (y === last && x === last ?
-         this.cells[0][0] :
-         this.cells[y + 1][x + 1]) +
-
-      (y === 0 && x === last ?
-         this.cells[last][0] :
-         this.cells[y + 1][x + 1]) +
-      (y === last && x === 0 ?
-         this.cells[0][last] :
-         this.cells[y + 1][x + 1])
-    );
-    //*/
   }
   
   toggleCell(x, y) {
