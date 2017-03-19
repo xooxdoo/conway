@@ -1,2 +1,2 @@
 # conway
-Conzqys gq;e of life :D
+Conway's game of life :D
