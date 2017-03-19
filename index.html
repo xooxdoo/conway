@@ -10,7 +10,7 @@ canvas { display: block; margin: 10px auto; background: #000; cursor: none; }
 function main() {
   let canvas = document.body.appendChild(document.createElement("canvas"));
   let ctx = canvas.getContext("2d");
-  let grid = new Grid(32);
+  let grid = new Grid(50);
   let renderer = new Renderer(grid, ctx, 800);
   
   canvas.onmouseenter = _ => {
