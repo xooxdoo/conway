@@ -14,15 +14,18 @@ function main() {
   let renderer = new Renderer(grid, ctx, 800);
   
   canvas.onmouseenter = _ => {
+    console.log("Mouse over");
     renderer.cursor.over = true;
   };
   
   canvas.onmouseleave = _ => {
+    console.log("Mouse out");
     renderer.cursor.over = false;
     if (renderer.paused) renderer.render();
   };
   
   canvas.onmousemove = e => {
+    console.log("Mouse moving");
     if (renderer.cursor.over) {
       renderer.cursor.x = e.offsetX / renderer.unit |0;
       renderer.cursor.y = e.offsetY / renderer.unit |0;
@@ -31,6 +34,7 @@ function main() {
   };
   
   canvas.onclick = e => {
+    console.log("Stop n'update");
     let x = e.offsetX / renderer.unit |0;
     let y = e.offsetY / renderer.unit |0;
     renderer.paused = true;
@@ -39,6 +43,7 @@ function main() {
   };
   
   canvas.contextmenu = e => {
+    console.log("Update n'go");
     e.preventDefault();
     let x = e.offsetX / renderer.unit |0;
     let y = e.offsetY / renderer.unit |0;
@@ -136,6 +141,7 @@ class Renderer {
   get unit() { return this.grid.size / this.size; }
   
   render() {
+    console.log("Rendering");
     let ctx = this.ctx;
     let grid = this.grid;
     let size = grid.size;
