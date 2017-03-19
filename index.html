@@ -27,28 +27,23 @@ function main() {
   canvas.onmousemove = e => {
     //console.log("Mouse moving");
     if (renderer.cursor.over) {
-      renderer.cursor.x = e.offsetX / renderer.unit |0;
-      renderer.cursor.y = e.offsetY / renderer.unit |0;
+      renderer.cursor.x = (e.offsetX / renderer.unit) |0;
+      renderer.cursor.y = (e.offsetY / renderer.unit) |0;
       if (renderer.paused) renderer.render();
     }
   };
   
   canvas.onclick = e => {
     console.log("Stop n'update");
-    let x = e.offsetX / renderer.unit |0;
-    let y = e.offsetY / renderer.unit |0;
+    let x = (e.offsetX / renderer.unit) |0;
+    let y = (e.offsetY / renderer.unit) |0;
     renderer.paused = true;
     grid.toggleCell(x, y);
     renderer.render();
   };
   
-  canvas.contextmenu = e => {
-    console.log("Update n'go");
-    e.preventDefault();
-    let x = e.offsetX / renderer.unit |0;
-    let y = e.offsetY / renderer.unit |0;
+  canvas.onkeyup = _ => {
     renderer.paused = false;
-    grid.toggleCell(x, y);
   };
   
   requestAnimationFrame(function loop() {
@@ -174,7 +169,7 @@ class Renderer {
       console.log(
       ctx.fillStyle =
         this.renderColors ?
-        `hsl(${ score / 8 * 360|0 }, ${ score / 8 * 40 + 60 |0 }%, ${ score / 8 * 60 + 20 |0 }%)` :
+        `hsl(${ (score / 8 * 360)|0 }, ${ (score / 8 * 40 + 60 |0) }%, ${ (score / 8 * 60 + 20) |0 }%)` :
         "white");
       ctx.fillRect(x * unit, y * unit, unit, unit);
     }
