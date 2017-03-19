@@ -250,7 +250,7 @@ class Renderer {
     let isAlive = grid.isAlive(x, y);
     let isBirth = !isAlive && grid.isBirth(x, y);
     let isDeath = isAlive && grid.isDeath(x, y);
-    let score = grid.getScoreFor(x, y);
+    let score = grid.calculateScore(x, y);
     let unit = this.unit;
     
     if (isAlive) {
