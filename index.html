@@ -33,17 +33,20 @@ function main() {
     }
   };
   
+  let key = 0;
+  
   canvas.onclick = e => {
-    console.log("Stop n'update");
     let x = (e.offsetX / renderer.unit) |0;
     let y = (e.offsetY / renderer.unit) |0;
-    renderer.paused = true;
     grid.toggleCell(x, y);
     renderer.render();
-  };
-  
-  canvas.onkeyup = _ => {
-    renderer.paused = false;
+    console.log("PAUSED");
+    renderer.paused = true;
+    clearTimeout(key);
+    key = setTimeout(_ => {
+      console.log("UNPAUSED");
+      renderer.paused = false;
+    }, 1000);
   };
   
   requestAnimationFrame(function loop() {
