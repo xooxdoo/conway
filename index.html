@@ -43,7 +43,7 @@ function main() {
   };
   
   canvas.contextmenu = e => {
-    console.log("Update n'go");
+    // console.log("Update n'go");
     e.preventDefault();
     let x = e.offsetX / renderer.unit |0;
     let y = e.offsetY / renderer.unit |0;
@@ -131,7 +131,7 @@ class Renderer {
     this.size = ctx.canvas.width = ctx.canvas.height = size;
     this.cursor = { over: false, x: 0, y: 0 };
     this.paused = false;
-    this.renderColors = true;
+    this.renderColors = false;
     this.renderBirths = true;
     this.renderDeaths = true;
     this.renderScores = true;
@@ -171,10 +171,11 @@ class Renderer {
     let unit = this.unit;
     
     if (isAlive) {
+      console.log(
       ctx.fillStyle =
         this.renderColors ?
         `hsl(${ score / 8 * 360|0 }, ${ score / 8 * 40 + 60 |0 }%, ${ score / 8 * 60 + 20 |0 }%)` :
-        "white";
+        "white");
       ctx.fillRect(x * unit, y * unit, unit, unit);
     }
     
