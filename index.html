@@ -71,7 +71,7 @@ class Grid {
     for (let y = 0; y < size; y++) {
       for (let x = 0; x < size; x++) {
         let score = this.scores[y][x];
-        if (this.isAlive(x, y) && (score < 2 || score > 3))
+        if (this.isAlive(x, y) && (score !== 2 && score !== 3))
           this.cells[y][x] = 0;
         if (!this.isAlive(x, y) && score === 3)
           this.cells[y][x] = 1;
@@ -112,7 +112,7 @@ class Grid {
   isBirth(x, y) { return this.scores[y][x] === 3; }
   isDeath(x, y) { 
     let score = this.scores[y][x];
-    return score < 2 || score > 3;
+    return score !== 2 && score !== 3;
   }
 }
 
