@@ -148,9 +148,9 @@ class Grid {
       }
       score += this.cells[y - 1][x];
       if (x !== last) {
-        score += this.cells[y + 1][x + 1];
+        score += this.cells[y - 1][x + 1];
       } else {
-        score += this.cells[y + 1][0];
+        score += this.cells[y - 1][0];
       }
     } else {
       if (x !== 0) {
