@@ -217,7 +217,7 @@ class Renderer {
     this.size = ctx.canvas.width = ctx.canvas.height = size;
     this.cursor = { over: false, x: 0, y: 0 };
     this.paused = false;
-    this.renderColors = false;
+    this.renderColors = true;
     this.renderBirths = true;
     this.renderDeaths = true;
     this.renderScores = true;
@@ -257,11 +257,10 @@ class Renderer {
     let unit = this.unit;
     
     if (isAlive) {
-      console.log(
       ctx.fillStyle =
         this.renderColors ?
         `hsl(${ (score / 8 * 360)|0 }, ${ (score / 8 * 40 + 60 |0) }%, ${ (score / 8 * 60 + 20) |0 }%)` :
-        "white");
+        "white";
       ctx.fillRect(x * unit, y * unit, unit, unit);
     }
     
