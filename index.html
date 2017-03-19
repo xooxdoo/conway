@@ -70,10 +70,11 @@ class Grid {
     let size = this.size;
     for (let y = 0; y < size; y++) {
       for (let x = 0; x < size; x++) {
-        this.cells[y][x] =
-          this.isAlive(x, y) ?
-            !this.isDeath(x, y) :
-             this.isBirth(x, y);
+        let score = this.scores[y][x];
+        if (this.isAlive(x, y) && (score < 2 || score > 3))
+          this.cells[y][x] = 0;
+        if (this.isAlive(x, y) && score === 3)
+          this.cells[y][x] = 1;
       }
     }
   }
@@ -90,111 +91,16 @@ class Grid {
   calculateScore(x, y) {
     let last = this.size - 1;
     let score = 0;
+    score += this.cells[y === 0 ? last : y - 1][x === 0 ? last : x - 1];
+    score += this.cells[y === 0 ? last : y - 1][x];
+    score += this.cells[y === 0 ? last : y - 1][x === last ? 0 : x + 1];
     
-    if (x !== 0) {
-      if (y !== 0) {
-        score += this.cells[y - 1][x - 1];
-      } else {
-        score += this.cells[last][x - 1];
-      }
-      score += this.cells[y][x - 1];
-      if (y !== last) {
-        score += this.cells[y + 1][x - 1];
-      } else {
-        score += this.cells[0][x - 1];
-      }
-    } else {
-      if (y !== 0) {
-        score += this.cells[y - 1][last];
-      } else {
-        score += this.cells[last][last];
-      }
-      score += this.cells[y][last];
-      if (y !== last) {
-        score += this.cells[y + 1][last];
-      } else {
-        score += this.cells[0][last];
-      }
-    }
-    /*
-    if (x !== last) {
-      if (y !== 0) {
-        score += this.cells[y - 1][x + 1];
-      } else {
-        score += this.cells[last][x + 1];
-      }
-      score += this.cells[y][x + 1];
-      if (y !== last) {
-        score += this.cells[y + 1][x + 1];
-      } else {
-        score += this.cells[0][x + 1];
-      }
-    } else {
-      if (y !== 0) {
-        score += this.cells[y - 1][0];
-      } else {
-        score += this.cells[last][0];
-      }
-      score += this.cells[y][last];
-      if (y !== last) {
-        score += this.cells[y + 1][0];
-      } else {
-        score += this.cells[0][0];
-      }
-    }
-    */
-    if (y !== 0) {
-      if (x !== 0) {
-        score += this.cells[y - 1][x - 1];
-      } else {
-        score += this.cells[y - 1][last];
-      }
-      score += this.cells[y - 1][x];
-      if (x !== last) {
-        score += this.cells[y - 1][x + 1];
-      } else {
-        score += this.cells[y - 1][0];
-      }
-    } else {
-      if (x !== 0) {
-        score += this.cells[last][x - 1];
-      } else {
-        score += this.cells[last][last];
-      }
-      score += this.cells[last][x];
-      if (x !== last) {
-        score += this.cells[last][x + 1];
-      } else {
-        score += this.cells[last][0];
-      }
-    }
-    /*
-    if (y !== last) {
-      if (x !== 0) {
-        score += this.cells[y + 1][x - 1];
-      } else {
-        score += this.cells[y + 1][last];
-      }
-      score += this.cells[y + 1][x];
-      if (x !== last) {
-        score += this.cells[y + 1][x + 1];
-      } else {
-        score += this.cells[y + 1][0];
-      }
-    } else {
-      if (x !== 0) {
-        score += this.cells[0][x - 1];
-      } else {
-        score += this.cells[0][last];
-      }
-      score += this.cells[0][x];
-      if (x !== last) {
-        score += this.cells[0][x + 1];
-      } else {
-        score += this.cells[0][0];
-      }
-    }
-    */
+    score += this.cells[y][x === 0 ? last : x - 1];
+    score += this.cells[y][x === last ? 0 : x + 1];
+    
+    score += this.cells[y === last ? 0 : y + 1][x === 0 ? last : x - 1];
+    score += this.cells[y === last ? 0 : y + 1][x];
+    score += this.cells[y === last ? 0 : y + 1][x === last ? 0 : x + 1];
     return score;
   }
   
