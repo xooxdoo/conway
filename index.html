@@ -14,18 +14,18 @@ function main() {
   let renderer = new Renderer(grid, ctx, 800);
   
   canvas.onmouseenter = _ => {
-    console.log("Mouse over");
+    //console.log("Mouse over");
     renderer.cursor.over = true;
   };
   
   canvas.onmouseleave = _ => {
-    console.log("Mouse out");
+    //console.log("Mouse out");
     renderer.cursor.over = false;
     if (renderer.paused) renderer.render();
   };
   
   canvas.onmousemove = e => {
-    console.log("Mouse moving");
+    //console.log("Mouse moving");
     if (renderer.cursor.over) {
       renderer.cursor.x = e.offsetX / renderer.unit |0;
       renderer.cursor.y = e.offsetY / renderer.unit |0;
@@ -157,6 +157,7 @@ class Renderer {
   }
   
   renderCursor(ctx) {
+    console.log("Rendering cursor");
     ctx.strokeStyle = "dodgerblue";
     let unit = this.unit;
     ctx.strokeRect(this.cursor.x * unit, this.cursor.y * unit, unit, unit);
