@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<title>Conway's game of life</title>
+<style>
+body { background: #333; }
+canvas { display: block; margin: 10px auto; background: #000; cursor: none; }
+<style>
+<script>
+"use strict";
+
+function main() {
+  let grid = new Grid();
+  let renderer = new Renderer(grid, ctx, 800);
+}
+
+class Renderer {
+  constructor(grid, ctx, size) {
+    this.grid = grid;
+    this.ctx = ctx;
+    this.size = ctx.canvas.width = ctx.canvas.height = size;
+    this.cursor = { over: false, x: 0, y: 0 };
+  }
+  
+  get canvas() { return this.ctx.canvas; }
+  get unit() { return this.grid.size / this.size; }
+  
+  render() {
+    let ctx = this.ctx;
+    let grid = this.grid;
+    let size = grid.size;
+    for (let y = 0; y < size; y++) {
+      for (let x = 0; x < size; x++) {
+        this.renderCell(grid, ctx, x, y);
+      }
+    }
+  }
+  
+  renderCell(grid, ctx, x, y) {
+    let isAlive = grid.isAlive(x, y);
+    let isBirth = !isAlive && grid.isBirth(x, y);
+    let isDeath = isAlive && grid.isDeath(x, y);
+    let score = grid.getScoreFor(x, y);
+  }
+}
+
+window.onload = main;
+
+function create2DArray(rowCount, colCount, defaultValue) {
+  return Array.apply(null, Array(rowCount)).map(_ => {
+    return Array.apply(null, Array(colCount)).map(_ => defaultValue);
+  });
+}
+
+</script>
