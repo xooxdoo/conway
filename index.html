@@ -50,7 +50,7 @@ function main() {
     if (!renderer.paused) {
       grid.evolve();
       grid.calculateScores();
-      renderer.renderer();
+      renderer.render();
     }
     requestAnimationFrame(loop, canvas);
   }, canvas);
