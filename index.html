@@ -60,6 +60,7 @@ class Grid {
   constructor(size) {
     this.cells = create2DArray(size, size, 0);
     this.scores = create2DArray(size, size, 0);
+    this.size = size;
   }
   
   evolve() {
