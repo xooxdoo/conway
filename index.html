@@ -141,7 +141,7 @@ class Renderer {
   get unit() { return this.grid.size / this.size; }
   
   render() {
-    console.log("Rendering");
+    // console.log("Rendering");
     let ctx = this.ctx;
     let grid = this.grid;
     let size = grid.size;
@@ -157,7 +157,7 @@ class Renderer {
   }
   
   renderCursor(ctx) {
-    console.log("Rendering cursor");
+    // console.log("Rendering cursor");
     ctx.strokeStyle = "dodgerblue";
     let unit = this.unit;
     ctx.strokeRect(this.cursor.x * unit, this.cursor.y * unit, unit, unit);
