@@ -274,7 +274,8 @@ class Renderer {
       ctx.fillRect(x * unit + 2, y * unit + 2, unit - 4, unit - 4);
     }
     
-    // TODO: score rendering
+    ctx.fillStyle = "rgba(0,0,0,0.1)";
+    ctx.fillRect(score, (x + 0.25) * unit, (y + 0.75) * unit);
   }
 }
 
